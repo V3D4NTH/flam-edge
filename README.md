@@ -32,5 +32,27 @@ Real-time edge detection viewer built using Android, OpenCV (C++), OpenGL ES, an
 - OpenCV 4.x Android SDK  
 - Node.js 16+ and TypeScript
 
+----------------------------------
+
+### 13/11/25 16:50 IST
+
+I will now be adding the codebase used for my first successful build. I am trying to have the edge-detection take place in real-time rather than having it delayed using frame-by-frame processing. Maybe it isn't rendering just yet due to latency issues or missing libraries.
+
+Below is what is working so far:
+
+✅ App opens successfully
+✅ Camera permission handling
+✅ Camera feed displaying (30 FPS)
+✅ Toggle button working (Bonus)
+✅ FPS counter working
+✅ UI layout complete
+✅ JNI bridge compiled
+✅ Project structure set up
+
+What isn't working:
+
+❌ OpenCV edge detection (Don't know why. Probably due to missing native libraries)
+
+
 
 
