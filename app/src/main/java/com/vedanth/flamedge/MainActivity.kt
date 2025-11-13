@@ -25,7 +25,7 @@ class MainActivity : AppCompatActivity() {
 
     companion object {
         private const val TAG = "MainActivity"
-
+        // test comment to remove vedanth4gd creds
         // Load native library
         init {
             System.loadLibrary("native-lib")
