@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🔥 flam-edge Web Viewer</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1e1e1e 0%, #2d2d2d 100%);
+            color: #ffffff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            width: 100%;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            color: #FF6B35;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: #aaaaaa;
+            font-size: 1rem;
+        }
+
+        .viewer-panel {
+            background: #333333;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+            margin-bottom: 20px;
+        }
+
+        .image-display {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        #frameImage {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            border: 2px solid #FF6B35;
+            background: #000000;
+        }
+
+        .stats-panel {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .stat-card {
+            background: #2d2d2d;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #FF6B35;
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            color: #aaaaaa;
+            margin-bottom: 5px;
+        }
+
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #FF6B35;
+            font-family: 'Courier New', monospace;
+        }
+
+        .controls {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        button {
+            background: #FF6B35;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        button:hover {
+            background: #ff5520;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(255, 107, 53, 0.4);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        input[type="file"] {
+            display: none;
+        }
+
+        .file-upload-label {
+            background: #4CAF50;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .file-upload-label:hover {
+            background: #45a049;
+            transform: translateY(-2px);
+        }
+
+        .info-text {
+            text-align: center;
+            color: #aaaaaa;
+            margin-top: 20px;
+            font-size: 0.9rem;
+        }
+
+        footer {
+            margin-top: 40px;
+            text-align: center;
+            color: #666666;
+            font-size: 0.85rem;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <header>
+        <h1>🔥 flam-edge Web Viewer</h1>
+        <p class="subtitle">Real-time Edge Detection Viewer - TypeScript Edition</p>
+    </header>
+
+    <div class="viewer-panel">
+        <div class="image-display">
+            <img id="frameImage"
+                 src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg=="
+                 alt="Processed Frame">
+        </div>
+
+        <div class="stats-panel">
+            <div class="stat-card">
+                <div class="stat-label">Frame Rate</div>
+                <div class="stat-value" id="fpsValue">0.0 FPS</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Resolution</div>
+                <div class="stat-value" id="resolutionValue">0 x 0</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Processing Time</div>
+                <div class="stat-value" id="processingTime">0 ms</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Filter Applied</div>
+                <div class="stat-value" id="filterType">Canny Edge</div>
+            </div>
+        </div>
+
+        <div class="controls">
+            <label for="fileInput" class="file-upload-label">
+                📁 Load Image
+            </label>
+            <input type="file" id="fileInput" accept="image/*">
+            <button id="generateSampleBtn">🎲 Generate Sample</button>
+            <button id="clearBtn">🗑️ Clear</button>
+        </div>
+
+        <p class="info-text">
+            Upload a processed frame from the Android app or generate a sample edge-detected image.
+        </p>
+    </div>
+
+    <footer>
+        <p>Built with TypeScript + HTML5 Canvas | flam-edge Project © 2025</p>
+    </footer>
+</div>
+
+<script src="dist/bundle.js"></script>
+</body>
+</html>
