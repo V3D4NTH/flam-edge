@@ -59,3 +59,10 @@ Output So Far:
 <img width="355" height="885" alt="image" src="https://github.com/user-attachments/assets/c9484ee5-4fe6-4448-beba-2c695f60f4c6" />
 <img width="357" height="884" alt="image" src="https://github.com/user-attachments/assets/d01f69ee-ad44-40f5-973a-69974522b2e1" />
 <img width="356" height="892" alt="image" src="https://github.com/user-attachments/assets/192c0641-049e-41dc-af82-451b86c0dc10" />
+
+
+-----------
+
+### 13/11/25 17:45 IST
+
+I changed my Git credentials from my former work account to my personal account as I noticed that it shows that my former work account is one of the contributors. Please note that it has been changed now as reflected in my latest commit made in MainActivity.kt
