@@ -19,7 +19,7 @@ Real-time edge detection viewer built using Android, OpenCV (C++), OpenGL ES, an
 
 
 ## Device Tested
-- OnePlus 11R (Android 15)
+- Samsung Galaxy A23
 
 
 
