@@ -96,3 +96,14 @@ Output
 <img width="368" height="718" alt="image" src="https://github.com/user-attachments/assets/c4114c8c-13f2-4f5d-9e05-843515243a85" />
 
 <img width="349" height="694" alt="image" src="https://github.com/user-attachments/assets/b958c9be-e124-48b2-aa2d-a85c7259bb6d" />
+
+
+### 14/11/25 13:28 IST
+
+TS Web Viewer works
+
+Output
+
+<img width="3206" height="1844" alt="image" src="https://github.com/user-attachments/assets/c8351751-1731-48e7-8802-4ffea73d1b50" />
+
+<img width="3210" height="1876" alt="image" src="https://github.com/user-attachments/assets/86be4f8b-32e6-4ce7-a6ba-a31f155d2476" />
