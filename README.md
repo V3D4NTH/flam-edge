@@ -33,6 +33,12 @@ Real-time edge detection viewer built using Android, OpenCV (C++), OpenGL ES, an
 - OpenCV 4.x Android SDK
 - Node.js 16+ and TypeScript
 
+
+
+
+
+
+
 ----------------------------------
 
 ### 13/11/25 16:50 IST
@@ -101,7 +107,7 @@ Edge Detection works on mobile app.
 
 ### 14/11/25 13:28 IST
 
-TS Web Viewer works
+TS Web Viewer works. Also changed aspect ratio of mobile app to 4:3 to normalise view and avoid compression.
 
 #### Output
 
