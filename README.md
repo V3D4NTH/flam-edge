@@ -76,3 +76,6 @@ Fixed OpenGL rendering. Added logging. Removed TextureView.
 
 Output
 
+<img width="354" height="878" alt="image" src="https://github.com/user-attachments/assets/811f2341-3382-48ca-85da-06d5412f3180" />
+
+<img width="351" height="905" alt="image" src="https://github.com/user-attachments/assets/95698e3d-1765-4cce-b77d-dabf36015457" />
