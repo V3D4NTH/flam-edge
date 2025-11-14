@@ -54,7 +54,7 @@ What isn't working:
 
 ❌ OpenCV edge detection (Don't know why. Probably due to missing native libraries)
 
-Output So Far:
+#### Output
 
 <img width="350" height="870" alt="image" src="https://github.com/user-attachments/assets/cede2c9c-8f65-422f-916d-7f7295be147b" />
 <img width="355" height="885" alt="image" src="https://github.com/user-attachments/assets/c9484ee5-4fe6-4448-beba-2c695f60f4c6" />
@@ -74,7 +74,7 @@ I changed my Git credentials from my former work account to my personal account 
 
 Fixed OpenGL rendering. Added logging. Removed TextureView.
 
-Output
+#### Output
 
 <img width="354" height="878" alt="image" src="https://github.com/user-attachments/assets/811f2341-3382-48ca-85da-06d5412f3180" />
 
@@ -89,7 +89,7 @@ Output
 
 Edge Detection works on mobile app. 
 
-Output
+#### Output
 
 <img width="355" height="688" alt="image" src="https://github.com/user-attachments/assets/f7c12185-4370-46a0-bde2-2297b271a8f6" />
 
@@ -97,12 +97,13 @@ Output
 
 <img width="349" height="694" alt="image" src="https://github.com/user-attachments/assets/b958c9be-e124-48b2-aa2d-a85c7259bb6d" />
 
+--------------------
 
 ### 14/11/25 13:28 IST
 
 TS Web Viewer works
 
-Output
+#### Output
 
 <img width="3206" height="1844" alt="image" src="https://github.com/user-attachments/assets/c8351751-1731-48e7-8802-4ffea73d1b50" />
 
