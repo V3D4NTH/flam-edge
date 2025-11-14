@@ -2,19 +2,15 @@ package com.vedanth.flamedge
 
 import android.content.Context
 import android.graphics.ImageFormat
-import android.graphics.SurfaceTexture
 import android.hardware.camera2.*
 import android.media.Image
 import android.media.ImageReader
 import android.os.Handler
 import android.os.HandlerThread
 import android.util.Log
-import android.view.Surface
-import android.view.TextureView
 
 class CameraManager(
     private val context: Context,
-    private val textureView: TextureView,
     private val onFrameAvailable: (ByteArray, Int, Int, Float) -> Unit
 ) {
 
@@ -40,7 +36,6 @@ class CameraManager(
 
     init {
         setupCamera()
-        setupTextureView()
     }
 
     private fun setupCamera() {
@@ -61,34 +56,7 @@ class CameraManager(
         }
     }
 
-    private fun setupTextureView() {
-        // Check if surface is already available
-        if (textureView.isAvailable) {
-            openCamera()
-        } else {
-            // Wait for surface to be ready
-            textureView.surfaceTextureListener = object : TextureView.SurfaceTextureListener {
-                override fun onSurfaceTextureAvailable(surface: SurfaceTexture, width: Int, height: Int) {
-                    openCamera()
-                }
-
-                override fun onSurfaceTextureSizeChanged(surface: SurfaceTexture, width: Int, height: Int) {}
-                override fun onSurfaceTextureDestroyed(surface: SurfaceTexture): Boolean {
-                    closeCamera()
-                    return true
-                }
-                override fun onSurfaceTextureUpdated(surface: SurfaceTexture) {}
-            }
-        }
-    }
-
     fun openCamera() {
-        // Don't open if surface isn't ready
-        if (!textureView.isAvailable) {
-            Log.w(TAG, "TextureView not available yet")
-            return
-        }
-
         startBackgroundThread()
 
         if (cameraId == null) {
@@ -141,21 +109,12 @@ class CameraManager(
 
     private fun createCaptureSession() {
         try {
-            val surfaceTexture = textureView.surfaceTexture
-            if (surfaceTexture == null) {
-                Log.e(TAG, "SurfaceTexture is null!")
-                return
-            }
-
-            surfaceTexture.setDefaultBufferSize(IMAGE_WIDTH, IMAGE_HEIGHT)
-            val previewSurface = Surface(surfaceTexture)
-
-            val surfaces = listOf(previewSurface, imageReader?.surface!!)
+            val surfaces = listOf(imageReader?.surface!!)
 
             cameraDevice?.createCaptureSession(surfaces, object : CameraCaptureSession.StateCallback() {
                 override fun onConfigured(session: CameraCaptureSession) {
                     captureSession = session
-                    startPreview(previewSurface)
+                    startCapture()
                 }
 
                 override fun onConfigureFailed(session: CameraCaptureSession) {
@@ -168,10 +127,9 @@ class CameraManager(
         }
     }
 
-    private fun startPreview(previewSurface: Surface) {
+    private fun startCapture() {
         try {
             val captureRequestBuilder = cameraDevice?.createCaptureRequest(CameraDevice.TEMPLATE_PREVIEW)
-            captureRequestBuilder?.addTarget(previewSurface)
             captureRequestBuilder?.addTarget(imageReader?.surface!!)
 
             // Set auto-focus
@@ -193,7 +151,7 @@ class CameraManager(
             )
 
         } catch (e: CameraAccessException) {
-            Log.e(TAG, "Error starting preview: ${e.message}")
+            Log.e(TAG, "Error starting capture: ${e.message}")
         }
     }
 

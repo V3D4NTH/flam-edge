@@ -2,9 +2,9 @@ package com.vedanth.flamedge
 
 import android.Manifest
 import android.content.pm.PackageManager
+import android.opengl.GLSurfaceView
 import android.os.Bundle
 import android.util.Log
-import android.view.TextureView
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
@@ -14,7 +14,7 @@ import androidx.core.content.ContextCompat
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var textureView: TextureView
+    private lateinit var glSurfaceView: GLSurfaceView
     private lateinit var cameraManager: CameraManager
     private lateinit var glRenderer: OpenGLRenderer
     private lateinit var fpsTextView: TextView
@@ -25,10 +25,11 @@ class MainActivity : AppCompatActivity() {
 
     companion object {
         private const val TAG = "MainActivity"
-        // test comment to remove vedanth4gd creds
-        // Load native library
+
+        // Load native libraries
         init {
-            System.loadLibrary("native-lib")
+            System.loadLibrary("opencv_java4")  // Load OpenCV FIRST!
+            System.loadLibrary("native-lib")    // Then our library
         }
     }
 
@@ -37,9 +38,15 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         // Initialize views
-        textureView = findViewById(R.id.textureView)
+        glSurfaceView = findViewById(R.id.glSurfaceView)
         fpsTextView = findViewById(R.id.fpsTextView)
         toggleButton = findViewById(R.id.toggleButton)
+
+        // Setup GLSurfaceView
+        glSurfaceView.setEGLContextClientVersion(2)
+        glRenderer = OpenGLRenderer()
+        glSurfaceView.setRenderer(glRenderer)
+        glSurfaceView.renderMode = GLSurfaceView.RENDERMODE_WHEN_DIRTY
 
         // Setup button click listener
         toggleButton.setOnClickListener {
@@ -92,11 +99,8 @@ class MainActivity : AppCompatActivity() {
 
     private fun initializeCamera() {
         try {
-            // Initialize OpenGL renderer
-            glRenderer = OpenGLRenderer(textureView)
-
             // Initialize camera manager
-            cameraManager = CameraManager(this, textureView) { imageData, width, height, fps ->
+            cameraManager = CameraManager(this) { imageData, width, height, fps ->
                 // Process frame
                 processFrame(imageData, width, height, fps)
             }
@@ -115,15 +119,20 @@ class MainActivity : AppCompatActivity() {
 
             // Call native processing
             val processedData = if (isProcessingEnabled) {
+                Log.d(TAG, "Processing enabled - calling native code")
                 processImageNative(imageData, width, height)
             } else {
+                Log.d(TAG, "Processing disabled - using raw data")
                 imageData // Return raw data
             }
+
+            Log.d(TAG, "Input size: ${imageData.size}, Output size: ${processedData?.size ?: 0}")
 
             val processingTime = System.currentTimeMillis() - startTime
 
             // Update OpenGL texture
             glRenderer.updateTexture(processedData, width, height)
+            glSurfaceView.requestRender()  // Request a render!
 
             // Update FPS display
             runOnUiThread {
@@ -137,11 +146,15 @@ class MainActivity : AppCompatActivity() {
 
     override fun onPause() {
         super.onPause()
-        cameraManager.closeCamera()
+        glSurfaceView.onPause()
+        if (::cameraManager.isInitialized) {
+            cameraManager.closeCamera()
+        }
     }
 
     override fun onResume() {
         super.onResume()
+        glSurfaceView.onResume()
         if (checkCameraPermission() && ::cameraManager.isInitialized) {
             cameraManager.openCamera()
         }
@@ -151,9 +164,6 @@ class MainActivity : AppCompatActivity() {
         super.onDestroy()
         if (::cameraManager.isInitialized) {
             cameraManager.closeCamera()
-        }
-        if (::glRenderer.isInitialized) {
-            glRenderer.release()
         }
     }
 
