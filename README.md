@@ -1,4 +1,4 @@
-# flam-edge
+# 🔥 flam-edge
 
 Real-time edge detection viewer built using Android, OpenCV (C++), OpenGL ES, and TypeScript.
 
@@ -79,3 +79,20 @@ Output
 <img width="354" height="878" alt="image" src="https://github.com/user-attachments/assets/811f2341-3382-48ca-85da-06d5412f3180" />
 
 <img width="351" height="905" alt="image" src="https://github.com/user-attachments/assets/95698e3d-1765-4cce-b77d-dabf36015457" />
+
+
+
+-----------
+
+
+### 14/11/25 12:35 IST
+
+Edge Detection works on mobile app. 
+
+Output
+
+<img width="355" height="688" alt="image" src="https://github.com/user-attachments/assets/f7c12185-4370-46a0-bde2-2297b271a8f6" />
+
+<img width="368" height="718" alt="image" src="https://github.com/user-attachments/assets/c4114c8c-13f2-4f5d-9e05-843515243a85" />
+
+<img width="349" height="694" alt="image" src="https://github.com/user-attachments/assets/b958c9be-e124-48b2-aa2d-a85c7259bb6d" />
