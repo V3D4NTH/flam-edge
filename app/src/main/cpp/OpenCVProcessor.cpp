@@ -6,35 +6,6 @@
 #define LOGI(...) __android_log_print(ANDROID_LOG_INFO, LOG_TAG, __VA_ARGS__)
 #define LOGE(...) __android_log_print(ANDROID_LOG_ERROR, LOG_TAG, __VA_ARGS__)
 
-//void OpenCVProcessor::processImage(const unsigned char *inputData,
-//                                   unsigned char *outputData,
-//                                   int width,
-//                                   int height) {
-//    try {
-//        // Create OpenCV Mat from input data (grayscale)
-//        cv::Mat inputMat(height, width, CV_8UC1, (void *)inputData);
-//
-//        // Apply Canny edge detection
-//        cv::Mat edges;
-//        cv::Canny(inputMat, edges, 50, 150);
-//
-//        // Optional: Apply Gaussian blur before edge detection for better results
-//        // cv::Mat blurred;
-//        // cv::GaussianBlur(inputMat, blurred, cv::Size(5, 5), 1.5);
-//        // cv::Canny(blurred, edges, 50, 150);
-//
-//        // Copy result to output
-//        memcpy(outputData, edges.data, width * height);
-//
-//        LOGI("Processed frame: %dx%d", width, height);
-//
-//    } catch (const cv::Exception &e) {
-//        LOGE("OpenCV exception: %s", e.what());
-//        // On error, copy input to output (passthrough)
-//        memcpy(outputData, inputData, width * height);
-//    }
-//}
-
 void OpenCVProcessor::processImage(const unsigned char *inputData,
                                    unsigned char *outputData,
                                    int width,
@@ -45,14 +16,18 @@ void OpenCVProcessor::processImage(const unsigned char *inputData,
         // Create OpenCV Mat from input data (grayscale)
         cv::Mat inputMat(height, width, CV_8UC1, (void *)inputData);
 
-        // SIMPLE TEST: Just invert the image
-        cv::Mat inverted;
-        cv::bitwise_not(inputMat, inverted);
+        // Apply Gaussian blur to reduce noise
+        cv::Mat blurred;
+        cv::GaussianBlur(inputMat, blurred, cv::Size(5, 5), 1.5);
+
+        // Apply Canny edge detection
+        cv::Mat edges;
+        cv::Canny(blurred, edges, 50, 150);
 
         // Copy result to output
-        memcpy(outputData, inverted.data, width * height);
+        memcpy(outputData, edges.data, width * height);
 
-        LOGI("OpenCV processing completed successfully");
+        LOGI("OpenCV Canny edge detection completed: %dx%d", width, height);
 
     } catch (const cv::Exception &e) {
         LOGE("OpenCV exception: %s", e.what());
