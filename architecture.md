@@ -1,4 +1,4 @@
-# 🏗 flam-edge Architecture
+#  flam-edge Architecture
 
 ## System Overview
 
