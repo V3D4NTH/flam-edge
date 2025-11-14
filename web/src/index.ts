@@ -12,14 +12,14 @@ interface FrameStats {
 }
 
 class FrameViewer {
-    private frameImage: HTMLImageElement;
-    private fpsValue: HTMLElement;
-    private resolutionValue: HTMLElement;
-    private processingTime: HTMLElement;
-    private filterType: HTMLElement;
-    private fileInput: HTMLInputElement;
-    private generateSampleBtn: HTMLButtonElement;
-    private clearBtn: HTMLButtonElement;
+    private frameImage!: HTMLImageElement;
+    private fpsValue!: HTMLElement;
+    private resolutionValue!: HTMLElement;
+    private processingTime!: HTMLElement;
+    private filterType!: HTMLElement;
+    private fileInput!: HTMLInputElement;
+    private generateSampleBtn!: HTMLButtonElement;
+    private clearBtn!: HTMLButtonElement;
 
     private currentStats: FrameStats = {
         fps: 0,
@@ -63,7 +63,9 @@ class FrameViewer {
             reader.onload = (e) => {
                 const result = e.target?.result as string;
                 this.displayImage(result);
-                this.updateStatsFromImage(file);
+                setTimeout(() => {
+                                this.updateStatsFromImage(file);
+                            }, 100);
             };
 
             reader.readAsDataURL(file);
@@ -82,6 +84,7 @@ class FrameViewer {
             this.currentStats.height = img.height;
             this.currentStats.processingTime = Math.floor(Math.random() * 50) + 10; // Simulated
             this.currentStats.fps = 15.0;
+            this.currentStats.filterType = 'Canny Edge';
             this.updateStats();
         };
         img.src = URL.createObjectURL(file);

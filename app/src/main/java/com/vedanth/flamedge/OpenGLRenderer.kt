@@ -117,9 +117,31 @@ class OpenGLRenderer : GLSurfaceView.Renderer {
         GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_WRAP_S, GLES20.GL_CLAMP_TO_EDGE)
         GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_WRAP_T, GLES20.GL_CLAMP_TO_EDGE)
     }
-    
+
     override fun onSurfaceChanged(gl: GL10?, width: Int, height: Int) {
-        GLES20.glViewport(0, 0, width, height)
+        // Camera aspect ratio (640x480 = 4:3)
+        val cameraAspect = 640f / 480f
+
+        // Screen aspect ratio
+        val screenAspect = width.toFloat() / height.toFloat()
+
+        var viewportX = 0
+        var viewportY = 0
+        var viewportWidth = width
+        var viewportHeight = height
+
+        // Add letterboxing to maintain aspect ratio
+        if (screenAspect > cameraAspect) {
+            // Screen is wider - add black bars on sides
+            viewportWidth = (height * cameraAspect).toInt()
+            viewportX = (width - viewportWidth) / 2
+        } else {
+            // Screen is taller - add black bars on top/bottom
+            viewportHeight = (width / cameraAspect).toInt()
+            viewportY = (height - viewportHeight) / 2
+        }
+
+        GLES20.glViewport(viewportX, viewportY, viewportWidth, viewportHeight)
     }
     
     override fun onDrawFrame(gl: GL10?) {
