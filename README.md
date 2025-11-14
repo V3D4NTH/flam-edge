@@ -114,3 +114,6 @@ TS Web Viewer works. Also changed aspect ratio of mobile app to 4:3 to normalise
 <img width="3206" height="1844" alt="image" src="https://github.com/user-attachments/assets/c8351751-1731-48e7-8802-4ffea73d1b50" />
 
 <img width="3210" height="1876" alt="image" src="https://github.com/user-attachments/assets/86be4f8b-32e6-4ce7-a6ba-a31f155d2476" />
+
+![Edge Detection Demo](edge_detection.gif)
+
