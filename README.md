@@ -20,6 +20,7 @@ Real-time edge detection viewer built using Android, OpenCV (C++), OpenGL ES, an
 
 ## Device Tested
 - Samsung Galaxy A23
+- Samsung Galaxy A55
 
 
 
@@ -66,3 +67,12 @@ Output So Far:
 ### 13/11/25 17:45 IST
 
 I changed my Git credentials from my former work account to my personal account as I noticed that it shows that my former work account is one of the contributors. Please note that it has been changed now as reflected in my latest commit made in MainActivity.kt
+
+-----------
+
+### 14/11/25 11:40 IST
+
+Fixed OpenGL rendering. Added logging. Removed TextureView.
+
+Output
+
